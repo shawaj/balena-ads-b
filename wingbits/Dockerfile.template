@@ -15,17 +15,15 @@ RUN apt update && \
 
 FROM base AS release
 
-WORKDIR /tmp
-
 COPY wingbits_installer.sh /tmp
-RUN chmod +x /tmp/wingbits_installer.sh && \
-	./wingbits_installer.sh
- 
-COPY vector.yaml /
+COPY start.sh /
+COPY vector.yaml /etc/vector/vector.yaml
 
 WORKDIR /tmp
 
-RUN chmod +x /start.sh && \
+RUN chmod +x /tmp/wingbits_installer.sh && \
+	./wingbits_installer.sh && \
+        chmod +x /start.sh && \
 	rm -rf /tmp/*
 
 ENTRYPOINT ["/usr/bin/tini", "--", "/start.sh"]
