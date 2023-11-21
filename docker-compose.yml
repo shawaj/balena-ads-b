@@ -220,6 +220,8 @@ services:
     restart: always
     environment:
       - WINGBITS_DEVICE_ID=
+    expose:
+      - '30154'
   defli:
     depends_on:
       - dump1090-fa
