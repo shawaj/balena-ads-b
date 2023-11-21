@@ -1,7 +1,7 @@
 sources:
-  dump1090-fa:
+  readsb:
     type: "socket"
-    address: "0.0.0.0:30005"
+    address: "0.0.0.0:30006"
     mode: "tcp"
     decoding:
       codec: "json"
@@ -10,7 +10,7 @@ transforms:
   remapped:
     type: "remap"
     inputs:
-      - "dump1090-fa"
+      - "readsb"
     drop_on_abort: true
     source: |
       read_at, err = .now * 1000
