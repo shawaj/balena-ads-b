@@ -1,14 +1,16 @@
 FROM balenalib/%%BALENA_ARCH%%-debian:bullseye AS base
 LABEL maintainer="https://github.com/ketilmo"
 
-EXPOSE 30154
+EXPOSE 39000 39001 30154
 
-ENV WINGBITS_DEVICE_ID=
-
+ENV DEFLI_UUID=
+ENV LAT=
+ENV LON=
+ENV ALT=
 ENV RECEIVER_HOST=dump1090-fa
 ENV RECEIVER_PORT=30005
 
-ARG PERM_INSTALL="curl gettext-base tini" 
+ARG PERM_INSTALL="python3-venv gettext-base tini" 
 
 RUN apt update && \
 	apt install -y $PERM_INSTALL && \
@@ -18,12 +20,19 @@ RUN apt update && \
 FROM base AS buildstep
 
 ARG READSB_COMMIT=f535e517996ad04ce8126a58757a9b91a82fe542
+ARG MLAT_TAG=v0.4.2
 ARG TEMP_INSTALL="git build-essential debhelper libncurses5-dev zlib1g-dev python3-dev libzstd-dev"
 
 WORKDIR /tmp
 
 RUN apt update && \
 	apt install -y $TEMP_INSTALL
+
+RUN git clone --depth 1 --branch $MLAT_TAG https://github.com/adsb-related-code/mlat-client && \
+	cd mlat-client && \
+    python3 -m venv /usr/local/share/defli/venv/ && \	
+    /usr/local/share/defli/venv/bin/python3 setup.py build && \	
+    /usr/local/share/defli/venv/bin/python3 setup.py install
 
 WORKDIR /tmp
 
@@ -34,18 +43,16 @@ RUN git clone --single-branch https://github.com/adsb-related-code/readsb && \
 
 FROM base AS release
 
-COPY wingbits_installer.sh /tmp
 COPY start.sh /
-COPY --from=buildstep /tmp/readsb/readsb /usr/bin/feed-wingbits
+COPY --from=buildstep /tmp/readsb/readsb /usr/bin/feed-defli
+
+RUN mkdir -p /usr/local/share/defli/venv/
+COPY --from=buildstep /usr/local/share/defli/venv/ /usr/local/share/defli/venv/
 
 WORKDIR /tmp
 
-RUN chmod +x /tmp/wingbits_installer.sh && \
-	./wingbits_installer.sh && \
-        chmod +x /start.sh && \
-        mkdir -p /run/wingbits-feed && \
+RUN chmod +x /start.sh && \
+        mkdir -p /run/defli-feed && \
 	rm -rf /tmp/*
 
-COPY vector.yaml /etc/vector/vector.yaml
-
-ENTRYPOINT ["/usr/bin/tini", "--", "/start.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/start.sh"] 
