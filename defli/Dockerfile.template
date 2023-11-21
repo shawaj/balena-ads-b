@@ -21,7 +21,7 @@ FROM base AS buildstep
 
 ARG READSB_COMMIT=f535e517996ad04ce8126a58757a9b91a82fe542
 ARG MLAT_TAG=v0.4.2
-ARG TEMP_INSTALL="git build-essential debhelper libncurses5-dev zlib1g-dev python3-dev libzstd-dev"
+ARG TEMP_INSTALL="git build-essential debhelper libncurses5-dev zlib1g-dev python3-dev libzstd-dev python3-venv"
 
 WORKDIR /tmp
 
