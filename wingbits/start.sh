@@ -42,8 +42,7 @@ echo " "
  echo "DEVICE_ID=\"${WINGBITS_DEVICE_ID}\"" >> /etc/default/vector
 
 # Start vector and readsb and put in the background.
-sed -i 's|NET_OPTIONS=\".*\"|NET_OPTIONS=\"--net-only --net-connector localhost,30006,json_out\"|' /etc/default/readsb"
-/usr/bin/feed-adsbx 2>&1 | stdbuf -o0 sed --unbuffered '/^$/d' |  awk -W interactive '{print "[feed-readsb]     " $0}' &
+/usr/bin/feed-adsbx --net --net-only --debug=n --quiet --net-connector localhost,30006,json_out 2>&1 | stdbuf -o0 sed --unbuffered '/^$/d' |  awk -W interactive '{print "[feed-readsb]     " $0}' &
 /usr/bin/vector --watch-config &
 
 # Wait for any services to exit.
