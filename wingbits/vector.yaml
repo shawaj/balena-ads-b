@@ -1,7 +1,7 @@
 sources:
   readsb:
     type: "socket"
-    address: "0.0.0.0:30006"
+    address: "127.0.0.1:30006"
     mode: "tcp"
     decoding:
       codec: "json"
