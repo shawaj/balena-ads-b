@@ -74,9 +74,9 @@ config['limited_status_allowed_list'] = ['position', 'alt_baro', 'gs', 'track', 
 # set it to logging.ERROR (case sensitive).
 config['logging'] =     {
                         # To enable, set to True (with capitlized T)
-                        'enabled':              False,
+                        'enabled':              True,
                         # Directory/folder where log files will be created
-                        'log_dir':              '/home/adsb/logs',
+                        'log_dir':              '/run/defli-feed',
                         # Log file name
                         'log_file_name':        'adsb_data_collector_mongodb.log',
                         # Log level
