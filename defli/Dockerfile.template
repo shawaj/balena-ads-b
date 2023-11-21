@@ -1,6 +1,8 @@
 FROM balenalib/%%BALENA_ARCH%%-debian:bullseye AS base
 LABEL maintainer="https://github.com/ketilmo"
 
+EXPOSE 39000 39001 30154
+
 ENV DEFLI_UUID=
 ENV LAT=
 ENV LON=
