@@ -3,26 +3,42 @@ LABEL maintainer="https://github.com/ketilmo"
 
 ENV DEFLI_UUID=
 
-ARG PERM_INSTALL="python3-pip git gettext-base tini" 
+ENV RECEIVER_HOST=dump1090-fa
+ENV RECEIVER_PORT=30005
+
+ARG PERM_INSTALL="gettext-base tini" 
 
 RUN apt update && \
 	apt install -y $PERM_INSTALL && \
 	apt clean && apt autoclean && apt autoremove && \
 	rm -rf /var/lib/apt/lists/*
 
-FROM base AS release
+FROM base AS buildstep
 
-COPY defli_installer.sh /tmp
-COPY start.sh /
+ARG READSB_COMMIT=f535e517996ad04ce8126a58757a9b91a82fe542
+ARG TEMP_INSTALL="build-essential debhelper libncurses5-dev zlib1g-dev python3-dev libzstd-dev"
 
 WORKDIR /tmp
 
-RUN chmod +x /tmp/defli_installer.sh && \
-	./defli_installer.sh && \
-        chmod +x /start.sh && \
+RUN apt update && \
+	apt install -y $TEMP_INSTALL
+
+WORKDIR /tmp
+
+RUN git clone --single-branch https://github.com/adsb-related-code/readsb && \
+	cd readsb && \
+	git checkout $READSB_COMMIT && \
+	make -j3 AIRCRAFT_HASH_BITS=14
+
+FROM base AS release
+
+COPY start.sh /
+COPY --from=buildstep /tmp/readsb/readsb /usr/bin/feed-defli
+
+WORKDIR /tmp
+
+RUN chmod +x /start.sh && \
         mkdir -p /run/defli-feed && \
 	rm -rf /tmp/*
-
-COPY config.py /run/defli-python/adsb-data-collector-mongodb
 
 ENTRYPOINT ["/usr/bin/tini", "--", "/start.sh"] 
