@@ -1,12 +1,12 @@
 FROM balenalib/%%BALENA_ARCH%%-debian:bullseye AS base
 LABEL maintainer="https://github.com/ketilmo"
 
-ENV WINGBITS_DEVICE_ID=
+ENV DEFLI_UUID=
 
 ENV RECEIVER_HOST=dump1090-fa
 ENV RECEIVER_PORT=30005
 
-ARG PERM_INSTALL="curl gettext-base tini" 
+ARG PERM_INSTALL="python3-pip git gettext-base tini" 
 
 RUN apt update && \
 	apt install -y $PERM_INSTALL && \
@@ -16,7 +16,7 @@ RUN apt update && \
 FROM base AS buildstep
 
 ARG READSB_COMMIT=f535e517996ad04ce8126a58757a9b91a82fe542
-ARG TEMP_INSTALL="git build-essential debhelper libncurses5-dev zlib1g-dev python3-dev libzstd-dev"
+ARG TEMP_INSTALL="build-essential debhelper libncurses5-dev zlib1g-dev python3-dev libzstd-dev"
 
 WORKDIR /tmp
 
@@ -32,18 +32,18 @@ RUN git clone --single-branch https://github.com/adsb-related-code/readsb && \
 
 FROM base AS release
 
-COPY wingbits_installer.sh /tmp
+COPY defli_installer.sh /tmp
 COPY start.sh /
-COPY --from=buildstep /tmp/readsb/readsb /usr/bin/feed-wingbits
+COPY --from=buildstep /tmp/readsb/readsb /usr/bin/feed-defli
 
 WORKDIR /tmp
 
-RUN chmod +x /tmp/wingbits_installer.sh && \
-	./wingbits_installer.sh && \
+RUN chmod +x /tmp/defli_installer.sh && \
+	./defli_installer.sh && \
         chmod +x /start.sh && \
-        mkdir -p /run/wingbits-feed && \
+        mkdir -p /run/defli-feed && \
 	rm -rf /tmp/*
 
-COPY vector.yaml /etc/vector/vector.yaml
+COPY config.py /run/defli-python/adsb-data-collector-mongodb
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/start.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/start.sh"] 
