@@ -18,7 +18,7 @@ missing_variables=false
         
 # Begin defining all the required configuration variables.
 
-[ -z "$WINGBITS_DEVICE_ID" ] && echo "Plane Finder Sharecode is missing, will abort startup." && missing_variables=true || echo "Plane Finder Sharecode is set: $WINGBITS_DEVICE_ID"
+[ -z "$WINGBITS_DEVICE_ID" ] && echo "Wingbits Device ID is missing, will abort startup." && missing_variables=true || echo "Wingbits Device ID is set: $WINGBITS_DEVICE_ID"
 [ -z "$RECEIVER_HOST" ] && echo "Receiver host is missing, will abort startup." && missing_variables=true || echo "Receiver host is set: $RECEIVER_HOST"
 [ -z "$RECEIVER_PORT" ] && echo "Receiver port is missing, will abort startup." && missing_variables=true || echo "Receiver port is set: $RECEIVER_PORT"
 
