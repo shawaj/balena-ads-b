@@ -220,6 +220,14 @@ services:
     restart: always
     environment:
       - WINGBITS_DEVICE_ID=
+  defli:
+    depends_on:
+      - dump1090-fa
+    build: ./defli
+    image: defli
+    restart: always
+    environment:
+      - DEFLI_UUID=
 # Optional: Uncomment to enable custom mlat server.
 #  mlat-client:
 #    depends_on:
