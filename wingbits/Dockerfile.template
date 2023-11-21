@@ -1,6 +1,8 @@
 FROM balenalib/%%BALENA_ARCH%%-debian:bullseye AS base
 LABEL maintainer="https://github.com/ketilmo"
 
+EXPOSE 30154
+
 ENV WINGBITS_DEVICE_ID=
 
 ENV RECEIVER_HOST=dump1090-fa
