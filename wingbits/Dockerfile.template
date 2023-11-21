@@ -34,13 +34,14 @@ FROM base AS release
 
 COPY wingbits_installer.sh /tmp
 COPY start.sh /
-COPY --from=buildstep /tmp/readsb/readsb /usr/bin/feed-adsbx
+COPY --from=buildstep /tmp/readsb/readsb /usr/bin/feed-wingbits
 
 WORKDIR /tmp
 
 RUN chmod +x /tmp/wingbits_installer.sh && \
 	./wingbits_installer.sh && \
         chmod +x /start.sh && \
+        mkdir -p /run/wingbits-feed && \
 	rm -rf /tmp/*
 
 COPY vector.yaml /etc/vector/vector.yaml
