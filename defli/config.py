@@ -14,7 +14,7 @@ config['db'] = {
                 } #Include username and password in mongodb_conn_str
 
 # Dump1090 URL for the aircraft.json file
-config['dump1090_url'] = 'file://run/defli-feed/aircraft.json'
+config['dump1090_url'] = 'http://dump1090-fa/skyaware/data/aircraft.json'
 
 # Once a flight ID is received for the first time,
 # status records already inserted to the DB can be updated with the flight ID.
@@ -74,7 +74,7 @@ config['limited_status_allowed_list'] = ['position', 'alt_baro', 'gs', 'track', 
 # set it to logging.ERROR (case sensitive).
 config['logging'] =     {
                         # To enable, set to True (with capitlized T)
-                        'enabled':              True,
+                        'enabled':              False,
                         # Directory/folder where log files will be created
                         'log_dir':              '/run/defli-feed',
                         # Log file name
