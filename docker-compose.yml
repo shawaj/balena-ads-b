@@ -228,6 +228,13 @@ services:
     restart: always
     environment:
       - DEFLI_UUID=
+      - LAT=
+      - LON=
+      - ALT=
+    expose:
+      - '30154'
+      - '39000'
+      - '39001'
 # Optional: Uncomment to enable custom mlat server.
 #  mlat-client:
 #    depends_on:
