@@ -39,7 +39,7 @@ echo " "
 # Variables are verified – continue with startup procedure.
 
 # Start vector and readsb and put in the background.
-/usr/bin/feed-defli --net --net-only --debug=n --quiet --net-connector localhost,30006,json_out --write-json /run/defli-feed --net-beast-reduce-interval 0.5 --net-heartbeat 60 --net-ro-size 1280 --net-ro-interval 0.2 --net-ro-port 0 --net-sbs-port 0 --net-bi-port 30154 --net-bo-port 0 --net-ri-port 0 --net-connector "$RECEIVER_HOST","$RECEIVER_PORT",beast_in 2>&1 | stdbuf -o0 sed --unbuffered '/^$/d' |  awk -W interactive '{print "[readsb-defli]     " $0}' &
+/usr/bin/feed-defli --net --net-only --debug=n --quiet --write-json /run/defli-feed --net-beast-reduce-interval 0.5 --net-heartbeat 60 --net-ro-size 1280 --net-ro-interval 0.2 --net-ro-port 0 --net-sbs-port 0 --net-bi-port 30154 --net-bo-port 0 --net-ri-port 0 --net-connector "$RECEIVER_HOST","$RECEIVER_PORT",beast_in 2>&1 | stdbuf -o0 sed --unbuffered '/^$/d' |  awk -W interactive '{print "[readsb-defli]     " $0}' &
 nohup /usr/bin/python3 /run/defli-python/adsb-data-collector-mongodb/adsb-data-collector.py &
 
 # Wait for any services to exit.
