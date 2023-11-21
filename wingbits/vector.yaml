@@ -1,7 +1,7 @@
 sources:
   dump1090-fa:
     type: "socket"
-    address: "dump1090-fa:30005"
+    address: "0.0.0.0:30005"
     mode: "tcp"
     decoding:
       codec: "json"
