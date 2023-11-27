@@ -1,4 +1,4 @@
-FROM balenalib/%%BALENA_ARCH%%-debian:bookworm AS base
+FROM balenalib/%%BALENA_ARCH%%-debian:bullseye AS base
 LABEL maintainer="https://github.com/ketilmo"
 
 EXPOSE 8754

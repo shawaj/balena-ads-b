@@ -77,7 +77,11 @@ Thanks to [rmorillo24](https://github.com/rmorillo24/) for verifying balenaFin c
 
 Thanks to [schubydoo](https://github.com/schubydoo) for assistance with keeping the repository up to date.
 
-And thanks to [schubydoo](https://github.com/schubydoo), [JPGMC](https://github.com/JPGMC), and [alanb128](https://github.com/alanb128) for beta testing the UAT support.
+Thanks to [schubydoo](https://github.com/schubydoo), [JPGMC](https://github.com/JPGMC), and [alanb128](https://github.com/alanb128) for beta testing the UAT support.
+
+And thanks to [Aaron Shaw (shawaj)](https://github.com/shawaj) for implementing Wingbits support, fixing bugs, and improving the code.
+
+You are all stars! 🤩
 
 Software packages downloaded, installed, and configured by the balena-ads-b script are disclosed in [CREDITS.md](https://github.com/ketilmo/balena-ads-b/blob/master/CREDITS.md).
 
