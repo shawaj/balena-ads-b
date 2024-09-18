@@ -26,9 +26,16 @@
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": ["WINGBITS_COMMIT_ID=(?<currentDigest>.*?)\\n"],
       "currentValueTemplate": "master",
-      "depNameTemplate": "gitlab.com/wingbits/config",
+      "depNameTemplate": "wingbits/config",
       "packageNameTemplate": "https://gitlab.com/wingbits/config",
       "datasourceTemplate": "git-refs"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
+      "matchStrings": ["WINGBITS_VERSION=(?<currentValue>.*?)\\n"],
+      "depNameTemplate": "wingbits-version",
+      "datasourceTemplate": "custom.wingbits"
     }
   ],
   "customDatasources": {
@@ -37,8 +44,22 @@
       "transformTemplates": [
         "{\"releases\":[{\"version\": $.platform.linux_arm64_tgz.version}]}"
       ]
+    },
+    "wingbits": {
+      "defaultRegistryUrlTemplate": "https://gitlab.com/wingbits/config/-/raw/master/vector.yaml?ref_type=heads",
+      "format": "html"
     }
   },
+  "packageRules": [
+    {
+      "matchDatasources": ["custom.wingbits"],
+      "extractVersion": "^wb_version: (?<version>.*)$"
+    },
+    {
+      "matchPackageNames": ["/wingbits/"],
+      "groupName": "wingbits"
+    }
+  ],
   "logLevelRemap": [
     {
       "matchMessage": "/^Custom manager fetcher/",

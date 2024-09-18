@@ -8,8 +8,9 @@ ENV WINGBITS_DEVICE_ID=
 ENV RECEIVER_HOST=dump1090-fa
 ENV RECEIVER_PORT=30005
 
+# renovate: datasource=wingbits depName=wingbits-version versioning=loose
 ENV WINGBITS_CONFIG_VERSION=0.0.7
-# renovate: datasource=git-refs depName=gitlab.com/wingbits/config versioning=loose
+# renovate: datasource=git-refs depName=wingbits/config versioning=loose
 ENV WINGBITS_COMMIT_ID=5220b1d82379416f85f2ff5417575b3081f0559a
 
 ARG PERM_INSTALL="curl gettext-base tini ncurses-bin zlib1g" 
