@@ -33,7 +33,7 @@
     {
       "customType": "regex",
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
-      "matchStrings": ["WINGBITS_VERSIO=(?<currentValue>.*?)\\n"],
+      "matchStrings": ["WINGBITS_CONFIG_VERSION=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "wingbits-version",
       "datasourceTemplate": "custom.wingbits"
     }
