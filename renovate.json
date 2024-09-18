@@ -55,14 +55,14 @@
     "opensky": {
       "defaultRegistryUrlTemplate": "https://opensky-network.org/repos/debian/dists/opensky/custom/binary-amd64/Packages",
       "transformTemplates": [
-        "{ \"releases\": [{ \"version\": $match($.trim(), /Version: ([^\\s]+)/)[0] }] }"
+        "{ \"releases\": [{ \"version\": $match($trim(), /Version: ([^\\s]+)/)[0] }] }"
       ],
       "format": "plain"
     },
     "wingbits": {
       "defaultRegistryUrlTemplate": "https://gitlab.com/wingbits/config/-/raw/master/download.sh",
       "transformTemplates": [
-        "{ \"releases\": [{ \"version\": $match($.trim(), /WINGBITS_CONFIG_VERSION=([^\\s]+)/)[0] }] }"
+        "{ \"releases\": [{ \"version\": $match($trim(), /WINGBITS_CONFIG_VERSION=([^\\s]+)/)[0] }] }"
       ],
       "format": "plain"
     }
