@@ -55,7 +55,7 @@
     "opensky": {
       "defaultRegistryUrlTemplate": "https://opensky-network.org/repos/debian/dists/opensky/custom/binary-amd64/Packages",
       "transformTemplates": [
-        "{ \"releases\": [{ \"version\": $match($trim(), /Version: ([^\\s]+)/)[0] }] }"
+        "{ \"releases\": [{ \"version\": $trim($[0].data.releases.version.$match(/Version: ([^\\s]+)/).groups[0]) }] }"
       ],
       "format": "plain"
     },
