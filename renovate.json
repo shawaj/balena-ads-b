@@ -36,6 +36,13 @@
       "matchStrings": ["WINGBITS_CONFIG_VERSION=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "wingbits-version",
       "datasourceTemplate": "custom.wingbits"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
+      "matchStrings": ["OPENSKY_VERSION=(?<currentValue>.*?)\\n"],
+      "depNameTemplate": "opensky",
+      "datasourceTemplate": "custom.opensky"
     }
   ],
   "customDatasources": {
@@ -45,16 +52,22 @@
         "{\"releases\":[{\"version\": $.platform.linux_arm64_tgz.version}]}"
       ]
     },
+    "opensky": {
+      "defaultRegistryUrlTemplate": "https://opensky-network.org/repos/debian/dists/opensky/custom/binary-amd64/Packages",
+      "transformTemplates": [
+        "{ \"releases\": [{ \"version\": $match($.trim(), /Version: ([^\\s]+)/)[0] }] }"
+      ],
+      "format": "plain"
+    },
     "wingbits": {
-      "defaultRegistryUrlTemplate": "https://gitlab.com/wingbits/config/-/raw/master/vector.yaml?ref_type=heads",
-      "format": "html"
+      "defaultRegistryUrlTemplate": "https://gitlab.com/wingbits/config/-/raw/master/download.sh",
+      "transformTemplates": [
+        "{ \"releases\": [{ \"version\": $match($.trim(), /WINGBITS_CONFIG_VERSION=([^\\s]+)/)[0] }] }"
+      ],
+      "format": "plain"
     }
   },
   "packageRules": [
-    {
-      "matchDatasources": ["custom.wingbits"],
-      "extractVersion": "^wb_version: (?<version>.*)$"
-    },
     {
       "matchPackageNames": ["/wingbits/"],
       "groupName": "wingbits"
