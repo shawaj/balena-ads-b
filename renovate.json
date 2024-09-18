@@ -34,12 +34,14 @@
       "customType": "regex",
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": ["WINGBITS_CONFIG_VERSION=(?<currentValue>.*?)\\n"],
+      "depName": "wingbits-version",
       "datasourceTemplate": "custom.wingbits"
     },
     {
       "customType": "regex",
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": ["OPENSKY_VERSION=(?<currentValue>.*?)\\n"],
+      "depName": "opensky",
       "datasourceTemplate": "custom.opensky"
     }
   ],
