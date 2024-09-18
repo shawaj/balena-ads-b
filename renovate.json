@@ -70,7 +70,7 @@
   "packageRules": [
     {
       "matchPackageNames": ["/wingbits/"],
-      "groupName": "wingbits"
+      "groupName": "wingbits version to latest"
     }
   ],
   "logLevelRemap": [
