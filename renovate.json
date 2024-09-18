@@ -67,6 +67,12 @@
       "format": "plain"
     }
   },
+  "packageRules": [
+    {
+      "matchPackageNames": ["/wingbits/"],
+      "groupName": "wingbits"
+    }
+  ],
   "logLevelRemap": [
     {
       "matchMessage": "/^Custom manager fetcher/",
