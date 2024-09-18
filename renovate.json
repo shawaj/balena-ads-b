@@ -62,7 +62,7 @@
     "wingbits": {
       "defaultRegistryUrlTemplate": "https://gitlab.com/wingbits/config/-/raw/master/download.sh",
       "transformTemplates": [
-        "{ \"releases\": [{ \"version\": $trim($[0].releases.version.$match(/WINGBITS_CONFIG_VERSION="([^\\s]+)"/).groups[0]) }] }"
+        "{ \"releases\": [{ \"version\": $trim($[0].releases.version.$match(/WINGBITS_CONFIG_VERSION=\"([^\\s]+)\"/).groups[0]) }] }"
       ],
       "format": "plain"
     }
