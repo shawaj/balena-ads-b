@@ -20,7 +20,7 @@ RUN apt update && \
 FROM base AS buildstep
 
 # renovate: datasource=custom.opensky depName=opensky versioning=loose
-ARG OPENSKY_VERSION=2.1.6-1
+ARG OPENSKY_VERSION=2.1.7-1
 ARG TEMP_INSTALL="wget" 
 
 RUN apt update && \
