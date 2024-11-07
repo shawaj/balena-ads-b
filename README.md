@@ -125,7 +125,7 @@ If you live in the US, and want to track UAT traffic in addition to ADS-B traffi
 
 # Part 2 – Setup balena and configure the device
 
-[![Deploy with button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/ketilmo/balena-ads-b&defaultDeviceType=raspberrypi4-64)
+[![Deploy with button](https://raw.githubusercontent.com/ketilmo/balena-ads-b/master/docs/images/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/ketilmo/balena-ads-b&defaultDeviceType=raspberrypi4-64)
 
 or
 
