@@ -369,21 +369,27 @@ If you have not previously set up a Wingbits receiver that you want to reuse, do
 In the United States, aircraft can use either the ADS-B standard, which transmits at a frequency of 1090 MHz or the UAT protocol, which transmits at 978 MHz. If you live in the US and have an extra RTL-SDR dongle, you can track the UAT and ADS-B traffic. Please note that the blue FlightAware USB devices should only be used for ADS-B traffic, as they have an integrated filter optimized explicitly for the 1090 MHz frequencies. The orange FlightAware USB devices work well for tracking UAT traffic.
 
 1. Make sure you only have one RTL-SDR stick connected to your device before executing the following steps. The connected stick should be used for regular ADS-B 1090 MHz feeding. 
-2. Head to your device's *Summary* page. Click on the Device Variables-button in the left-hand menu. Add a variable named `DISABLED_SERVICES` and populate it with the values `dump1090-fa,dump978-fa`.
-3. From the *Summary* page, inside the *Terminal* section, click *Select a target*, then *dump1090-fa*, and finally *Start terminal session*. This will open a terminal that lets you interact directly with your PiAware container.
+2. Head to your device's *Summary* page. Click on the *Device Variables*-button in the left-hand menu. Add a variable named `DUMP1090_IDLE` and populate it with the value `true`.
+3. From the *Summary* page, inside the *Terminal* section, click *Select a target*, then *dump1090-fa*, and finally *Start terminal session*. This will open a terminal that lets you interact directly with the dump1090-fa container.
 4. Once the terminal prompt appears, enter `/add-serial-1090.sh`, then press return. 
 5. Type `YES`, followed by return, to change your dongle's serial number. Verify that the process completes successfully.
 6. Click on the *Device Variables*-button in the left-hand menu. Add a new variable named `DUMP1090_DEVICE` and set its value to `00001090`.
 7. Shut down your device. When it's powered off, remove the first RTL-SDR stick from the Pi.
 8. Insert the second RTL-SDR stick (the one used for UAT), leaving the first stick disconnected. Power on your device.
-9. Head to your device's *Summary* page. Wait for all containers to come up with the status *Running*. Inside the *Terminal* section, click *Select a target*, then *dump978-fa*, and finally *Start terminal session*.
-10. Once the terminal prompt appears, enter `/add-serial-978.sh`, then press return.
-11. Type `YES`, followed by return, to change your dongle's serial number. Verify that the process completes successfully.
-12. Click on the *Device Variables*-button in the left-hand menu. Add a new variable named `DUMP978_DEVICE` and set its value to `00000978`.
-13. Shut down your device. When it's powered off, connect both RTL-SDR sticks.
-14. Click on the *Device Variables* button in the left-hand menu. Delete the `DISABLED_SERVICES` variable.
-15. Add a new variable named `UAT_ENABLED` and assign it the value `true`.
+9. Click on the Device Variables-button in the left-hand menu. Delete the variable you created earlier called `DUMP1090_IDLE`. Then create a variable named `DUMP978_IDLE` and populate it with the value `true`. Also add a new variable named `UAT_ENABLED` and assign it the value `true`.
+10. Head to your device's *Summary* page. Wait for all containers to come up with the status *Running*. Inside the *Terminal* section, click *Select a target*, then *dump978-fa*, and finally *Start terminal session*.
+11. Once the terminal prompt appears, enter `/add-serial-978.sh`, then press return.
+12. Type `YES`, followed by return, to change your dongle's serial number. Verify that the process completes successfully.
+13. Click on the *Device Variables*-button in the left-hand menu. Add a new variable named `DUMP978_DEVICE` and set its value to `00000978`.
+14. Shut down your device. When it's powered off, connect both RTL-SDR sticks.
+15. Click on the *Device Variables*-button in the left-hand menu. Delete the `DUMP978_IDLE` variable.
 16. Power on the device. You should now be feeding ADS-B and UAT data simultaneously to the services that support it (FlightAware, RadarBox and ADSB-Exchange).
+
+**Manually set gain for UAT/dump978**
+
+By default the gain for the UAT/dump978 service is set to `--sdr-auto-gain`. This is an automatic setting which tries to get the optimum gain setting for your setup. In some cases the automatic gain setting can cause issues with over-saturation of your receiver, and so we have added an optional setting for `DUMP978_GAIN` to allow you to manually set it to an appropriate value of your choosing.
+
+In order to manually set the gain. click on the *Device Variables*-button in the left-hand menu in the balena dashboard. Add a new variable named `DUMP978_GAIN` and set its value to your required gain. You can choose from any of the following values: `0.0, 0.9, 1.4, 2.7, 3.7, 7.7, 8.7, 12.5, 14.4, 15.7, 16.6, 19.7, 20.7, 22.9, 25.4, 28.0, 29.7, 32.8, 33.8, 36.4, 37.2, 38.6, 40.2, 42.1, 43.4, 43.9, 44.5, 48.0, 49.6`
 
 # Part 11 – Add a digital display (Optional)
 balena also produces a project that can be easily configured to display a webpage in kiosk mode on a digital display called balenaDash. By dropping that project into this one, we can automatically display a feeder page directly from the Pi. We can then set a `LAUNCH_URL` device variable configured to connect to `http://{{YOURIP or YOURSERVICENAME}}:YOURSERVICEPORT` (where the service/port is one of the frontends above, like `http://planefinder:30053`) and that will automatically be displayed on the attached display. The balenaDash service can be configured locally by accessing the webserver on port 8081.
