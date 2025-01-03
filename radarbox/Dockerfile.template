@@ -20,7 +20,7 @@ RUN apt update && \
 FROM base AS buildstep
 
 # renovate: datasource=git-refs depName=wiedehopf/mlat-client versioning=loose
-ARG MLAT_VERSION=3f0bfb8c5202afb3a9a827ec9d2e82cac4f12819
+ARG MLAT_VERSION=414dc3f1e0ce23348c5f3b3b53b69c13e9e4be10
 ARG TEMP_INSTALL="build-essential debhelper python3-dev git" 
 
 RUN apt update && \
