@@ -106,8 +106,12 @@ Software packages downloaded, installed, and configured by the balena-ads-b scri
 - [Part 12 – Exploring flight traffic locally on your device](#part-12--exploring-flight-traffic-locally-on-your-device)
 - [Part 13 – Advanced configuration](#part-13--advanced-configuration)
   * [Disabling specific services](#disabling-specific-services)
+  * [Using different radio device types](#using-different-radio-device-types)
   * [Adaptive gain configuration](#adaptive-gain-configuration)
   * [Setting dump1090 antenna gain](#setting-dump1090-antenna-gain)
+  * [Device reboot on service exit](#device-reboot-on-service-exit)
+  * [Automatic balenaOS host updates](#automatic-balenaos-host-updates)
+  * [Custom MLAT client](#custom-mlat-client)
  - [Part 14 – Updating to the latest version](#part-14--updating-to-the-latest-version)
 
 # Part 1 – Build the receiver
@@ -467,10 +471,18 @@ dump978 and dump1090 can restart the device if it hits an error. You can enable 
 
 ## Automatic balenaOS host updates
 
-Automatically keep your balenaOS host release up-to-date. To enable this service, create a *Device Variables* named `ENABLED_SERVICES` with the value of `autohupr`.
+Automatically keep your balenaOS host release up-to-date. To enable this service, create a *Device Variables* named `ENABLED_SERVICES` with the value of `autohupr`. You may also want to set the following *Device Variables*:
 
 - `HUP_CHECK_INTERVAL`: Interval between checking for available updates. Default is 1d.
 - `HUP_TARGET_VERSION`: The OS version you want balenaHUP to automatically update your device to. This is a required variable to be specified, otherwise, an update won't be performed by default. Set the variable to 'latest'/'recommended' for your device to always update to the latest OS version or set it to a specific version (e.g '2.107.10').
+
+## Custom MLAT client
+
+In the [docker compose file]([https://github.com/ketilmo/balena-ads-b/blob/shawaj/mlat-version/docker-compose.yml](https://github.com/ketilmo/balena-ads-b/blob/master/docker-compose.yml#L258-L271)) you will notice at the bottom there is a section labelled `Optional: Uncomment to enable custom mlat server.` This allows you to share MLAT data with an MLAT server of your choosing, unrelated to any of the above services.
+
+In order to enable this, you will need to fork the repo and edit the docker-compose.yml file to remove the `#` at the beginning of each line starting with the one that says `mlat-client`. Once done you should save the file, and then you can deploy it to your fleet using the manual method described above in [Part 2 – Setup balena and configure the device](#part-2--setup-balena-and-configure-the-device).
+
+You will also need to add *Device Variables* named `MLAT_CLIENT_USER` with a value of your desired username or UUID and another one named `MLAT_SERVER` with a value or your desired MLAT server address and port. For example you might have an `MLAT_CLIENT_USER` of `0327791e-3777-40a5-addc-aa13408d3b07` and an `MLAT_SERVER` of `feed.mymlatserver.com:31090`.
 
 # Part 14 – Updating to the latest version
 Updating to the latest version is trivial. If you installed balena-ads-b using the blue Deploy with balena-button, you can click it again and overwrite your current application. Choose the "Deploy to existing fleet" option, then select the fleet you want to update. All settings will be preserved. For convenience, the button is right here:
