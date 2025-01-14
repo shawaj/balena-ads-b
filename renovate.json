@@ -48,12 +48,11 @@
     {
       "customType": "regex",
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
-      "matchStrings": ["MLAT_VERSION=(?<currentValue>.*?)\\n"],
+      "matchStrings": ["MLAT_VERSION=(?<currentDigest>.*?)\\n"],
       "currentValueTemplate": "master",
       "depNameTemplate": "wiedehopf/mlat-client",
       "packageNameTemplate": "https://github.com/wiedehopf/mlat-client",
-      "datasourceTemplate": "git-refs",
-      "versioningTemplate": "git"
+      "datasourceTemplate": "git-refs"
     }
   ],
   "customDatasources": {
