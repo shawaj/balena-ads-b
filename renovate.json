@@ -27,7 +27,7 @@
       "matchStrings": ["WINGBITS_COMMIT_ID=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "wingbits-version-json",
       "datasourceTemplate": "custom.wingbits-version-json",
-      "versioningTemplate": "git"
+      "versioningTemplate": "loose"
     },
     {
       "customType": "regex",
