@@ -46,7 +46,7 @@
     {
       "customType": "regex",
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
-      "matchStrings": ["MLAT_VERSION=(?<currentDigest>.*?)\\n"],
+      "matchStrings": ["MLAT_VERSION=(?<currentValue>.*?)\\n"],
       "currentValueTemplate": "master",
       "depNameTemplate": "wiedehopf/mlat-client",
       "packageNameTemplate": "https://github.com/wiedehopf/mlat-client",
