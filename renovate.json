@@ -26,15 +26,15 @@
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": ["WINGBITS_COMMIT_ID=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "wingbits-version-json",
-      "datasourceTemplate": "custom.wingbits_version_json",
+      "datasourceTemplate": "custom.wingbits-version-json",
       "versioningTemplate": "loose"
     },
     {
       "customType": "regex",
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": ["WINGBITS_CONFIG_VERSION=(?<currentValue>.*?)\\n"],
-      "depNameTemplate": "wingbits",
-      "datasourceTemplate": "custom.wingbits"
+      "depNameTemplate": "wingbits-version",
+      "datasourceTemplate": "custom.wingbits-version"
     },
     {
       "customType": "regex",
@@ -66,14 +66,14 @@
       ],
       "format": "plain"
     },
-    "wingbits": {
+    "wingbits-version": {
       "defaultRegistryUrlTemplate": "https://install.wingbits.com/download.sh",
       "transformTemplates": [
         "{ \"releases\": [{ \"version\": $trim($[0].releases.version.$match(/WINGBITS_CONFIG_VERSION=\"([^\\s]+)\"/).groups[0]) }] }"
       ],
       "format": "plain"
     },
-    "wingbits_version_json": {
+    "wingbits-version-json": {
       "defaultRegistryUrlTemplate": "https://install.wingbits.com/linux-arm64.json",
       "transformTemplates": [
         "{\"releases\":[{\"version\": $.Version, \"releaseTimestamp\": $.Date, \"digest\": $.Sha256}]}"
