@@ -26,24 +26,21 @@
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": ["WINGBITS_COMMIT_ID=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "wingbits-version-json",
-      "datasourceTemplate": "custom.wingbits-version-json",
-      "versioningTemplate": "loose"
+      "datasourceTemplate": "custom.wingbits_version_json"
     },
     {
       "customType": "regex",
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": ["WINGBITS_CONFIG_VERSION=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "wingbits-version",
-      "datasourceTemplate": "custom.wingbits-version",
-      "versioningTemplate": "loose"
+      "datasourceTemplate": "custom.wingbits"
     },
     {
       "customType": "regex",
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": ["OPENSKY_VERSION=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "opensky",
-      "datasourceTemplate": "custom.opensky",
-      "versioningTemplate": "loose"
+      "datasourceTemplate": "custom.opensky"
     },
     {
       "customType": "regex",
@@ -69,24 +66,30 @@
       ],
       "format": "plain"
     },
-    "wingbits-version": {
+    "wingbits": {
       "defaultRegistryUrlTemplate": "https://install.wingbits.com/download.sh",
       "transformTemplates": [
         "{ \"releases\": [{ \"version\": $trim($[0].releases.version.$match(/WINGBITS_CONFIG_VERSION=\"([^\\s]+)\"/).groups[0]) }] }"
       ],
       "format": "plain"
     },
-    "wingbits-version-json": {
+    "wingbits_version_json": {
       "defaultRegistryUrlTemplate": "https://install.wingbits.com/linux-arm64.json",
       "transformTemplates": [
-        "{\"releases\":[{ \"version\": $.Version, \"releaseTimestamp\": $.Date, \"digest\": $.Version  }] }"
-      ]
+        "{\"releases\":[{\"version\": $.Version}]}"
+      ],
     }
   },
   "packageRules": [
     {
       "matchPackageNames": ["/wingbits/"],
       "groupName": "wingbits version to latest"
+    }
+  ],
+  "logLevelRemap": [
+    {
+      "matchMessage": "/^Custom manager fetcher/",
+      "newLogLevel": "info"
     }
   ]
 }
