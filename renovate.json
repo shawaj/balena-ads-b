@@ -86,11 +86,5 @@
       "matchPackageNames": ["/wingbits/"],
       "groupName": "wingbits version to latest"
     }
-  ],
-  "logLevelRemap": [
-    {
-      "matchMessage": "/^Custom manager fetcher/",
-      "newLogLevel": "info"
-    }
   ]
 }
