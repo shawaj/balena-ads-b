@@ -80,7 +80,7 @@
     "wingbits-version-json": {
       "defaultRegistryUrlTemplate": "https://install.wingbits.com/linux-arm64.json",
       "transformTemplates": [
-        "{\"releases\":[{ \"version\": $.Version, \"releaseTimestamp\": $.Date, \"diges\": $.Version  }] }"
+        "{\"releases\":[{ \"version\": $.Version, \"releaseTimestamp\": $.Date, \"digest\": $.Version  }] }"
       ]
     }
   },
