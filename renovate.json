@@ -35,6 +35,7 @@
       "matchStrings": ["WINGBITS_CONFIG_VERSION=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "wingbits-version",
       "datasourceTemplate": "custom.wingbits-version"
+      "versioningTemplate": "loose"
     },
     {
       "customType": "regex",
@@ -42,6 +43,7 @@
       "matchStrings": ["OPENSKY_VERSION=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "opensky",
       "datasourceTemplate": "custom.opensky"
+      "versioningTemplate": "loose"
     },
     {
       "customType": "regex",
@@ -51,6 +53,7 @@
       "depNameTemplate": "wiedehopf/mlat-client",
       "packageNameTemplate": "https://github.com/wiedehopf/mlat-client",
       "datasourceTemplate": "git-refs"
+      "versioningTemplate": "git"
     }
   ],
   "customDatasources": {
