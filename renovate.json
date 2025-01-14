@@ -26,8 +26,7 @@
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": ["WINGBITS_COMMIT_ID=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "wingbits-version-json",
-      "datasourceTemplate": "custom.wingbits-version-json",
-      "versioningTemplate": "loose"
+      "datasourceTemplate": "custom.wingbits-version-json"
     },
     {
       "customType": "regex",
