@@ -16,10 +16,10 @@ jobs:
     name: "Balena Preload"
     runs-on: "ubuntu-latest"
     strategy:
-      max-parallel: 1
+      max-parallel: 2
       fail-fast: false
       matrix:
-        sbc: [raspberrypi3, raspberrypi3-64, raspberrypi4-64]
+        sbc: [raspberrypi3, raspberrypi3-64, raspberrypi4-64, raspberrypi400-64, raspberrypi5, intel-nuc, jetson-nano, orange-pi-zero]
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v4
