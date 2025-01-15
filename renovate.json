@@ -85,7 +85,7 @@
   },
   "packageRules": [
     {
-      "matchPackageNames": ["/wingbits/"],
+      "matchPackageNames": ["/^wingbits/"],
       "groupName": "wingbits version to latest"
     }
   ],
