@@ -28,7 +28,7 @@
         "WINGBITS_COMMIT_ID=(?<currentDigestShort>.*?)\\n",
         "WINGBITS_DATE=(?<currentValue>.*?)\\n"
       ],
-      "versioningTemplate": "regex:^(?<patch>20\\d\\d)-.*$",
+      "versioningTemplate": "regex:^(?<patch>20\\d\\d)-(?<minor>\\d\\d)-(?<major>\\d\\d).*$",
       "depNameTemplate": "wingbits-json",
       "datasourceTemplate": "custom.wingbits-json"
     },
@@ -79,7 +79,7 @@
     "wingbits-json": {
       "defaultRegistryUrlTemplate": "https://install.wingbits.com/linux-arm64.json",
       "transformTemplates": [
-        "{\"releases\":[{\"version\": $.Date, \"releaseTimestamp\": $.Date, \"digest\": $.Version}]}"
+        "{\"releases\":[{\"version\": $.Date, \"releaseTimestamp\": $.Date, \"digestShort\": $.Version}]}"
       ]
     }
   },
