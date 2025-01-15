@@ -24,8 +24,7 @@
     {
       "customType": "regex",
       "fileMatch": ["(^|/)Dockerfile\\.[^/]*$"],
-      "matchStrings": ["WINGITS_DATE=(?<currentValue>.*?)\\n"],
-      "versioningTemplate": "regex:^(?<patch>20\\d\\d)-.*$",
+      "matchStrings": ["WINGITS_COMMIT_ID=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "wingbits-version-json",
       "datasourceTemplate": "custom.wingbits-version-json"
     },
@@ -76,7 +75,7 @@
     "wingbits-version-json": {
       "defaultRegistryUrlTemplate": "https://install.wingbits.com/linux-arm64.json",
       "transformTemplates": [
-        "{\"releases\":[{\"version\": $.Date.$match(\"^(?<patch>20\\d\\d)-.*$\"), \"releaseTimestamp\": $.Date, \"digest\": $.Version}]}"
+        "{\"releases\":[{\"version\": $.Version, \"releaseTimestamp\": $.Date, \"digest\": $.Sha256}]}"
       ]
     }
   },
