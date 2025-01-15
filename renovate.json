@@ -86,6 +86,7 @@
   "packageRules": [
     {
       "matchDepNames": ["/^wingbits/"],
+      "matchDatasources": ["custom.wingbits-version", "custom.wingbits-json"],
       "groupName": "wingbits version to latest"
     }
   ],
